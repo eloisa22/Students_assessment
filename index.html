@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python Assessment: Basics, Tkinter, Turtle, Pygame</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--text:#1f2937;--muted:#6b7280;--accent:#2563eb;--accent-soft:#e8effd;--border:#e5e7eb;--code:#0f172a;--codetext:#e2e8f0;--ok:#15803d;--okbg:#e7f6ec;--bad:#b91c1c;--badbg:#fdeaea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--card:#171a21;--text:#e5e7eb;--muted:#9ca3af;--accent:#60a5fa;--accent-soft:#1b2a44;--border:#2a2f3a;--code:#0b0d12;--ok:#4ade80;--okbg:#12281b;--bad:#f87171;--badbg:#321517}}
+:root[data-theme="dark"]{--bg:#0f1115;--card:#171a21;--text:#e5e7eb;--muted:#9ca3af;--accent:#60a5fa;--accent-soft:#1b2a44;--border:#2a2f3a;--code:#0b0d12;--ok:#4ade80;--okbg:#12281b;--bad:#f87171;--badbg:#321517}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:780px;margin:0 auto;padding:24px 18px 48px}
+header{padding:28px 0 8px}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px}
+h1{font-size:clamp(26px,6vw,36px);margin:12px 0 8px;line-height:1.2}
+h2{font-size:18px;margin:0 0 8px}
+.lead{color:var(--muted);margin:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px}
+.sec{margin-top:28px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+label.f{font-weight:600;display:block;margin-bottom:6px}
+input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}
+input[type=text]:focus{outline:2px solid var(--accent);outline-offset:1px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:380px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.bar{height:8px;background:var(--border);border-radius:999px;overflow:hidden;margin-top:16px}
+.bar div{height:100%;width:0;background:var(--accent);transition:width .2s}
+.progress{font-size:13px;color:var(--muted);margin-top:6px}
+.qn{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.qt{font-weight:600;margin:4px 0 10px}
+pre{background:var(--code);color:var(--codetext);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5;margin:10px 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin:6px 0;cursor:pointer;background:var(--bg)}
+.choice:hover{border-color:var(--accent)}
+.choice input{margin-top:5px}
+.choice.ok{background:var(--okbg);border-color:var(--ok)}
+.choice.bad{background:var(--badbg);border-color:var(--bad)}
+.fb{margin-top:10px;font-size:14px;padding:10px 12px;border-radius:8px}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+button{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer}
+button.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.msg{color:var(--bad);font-size:14px;margin-top:10px;min-height:20px}
+.result{text-align:center}
+.big{font-size:46px;font-weight:800;margin:4px 0}
+.grade{font-size:22px;font-weight:800}
+.secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:16px;text-align:center}
+.secs div{border:1px solid var(--border);border-radius:8px;padding:10px;font-size:14px}
+.secs b{display:block;font-size:20px}
+@media print{.actions,.bar,.progress{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">Python Assessment</span>
+  <h1>Basics, Tkinter, Turtle and Pygame</h1>
+  <p class="lead">20 multiple choice questions. Answer all of them, then submit to see your score, grade, and feedback.</p>
+</header>
+
+<div class="card">
+  <label class="f" for="sname">Student name</label>
+  <input type="text" id="sname" autocomplete="name" placeholder="Type your full name">
+  <div class="bar"><div id="barfill"></div></div>
+  <div class="progress" id="progress">0 of 20 answered</div>
+</div>
+
+<div class="card">
+  <h2>Grading scale</h2>
+  <div class="tablewrap">
+  <table id="scale">
+    <thead><tr><th>Score</th><th>Percent</th><th>Grade</th><th>Remarks</th></tr></thead>
+    <tbody>
+      <tr data-min="18"><td>18 to 20</td><td>90 to 100%</td><td>A</td><td>Excellent</td></tr>
+      <tr data-min="16"><td>16 to 17</td><td>80 to 89%</td><td>B</td><td>Very Good</td></tr>
+      <tr data-min="14"><td>14 to 15</td><td>70 to 79%</td><td>C</td><td>Satisfactory (Passed)</td></tr>
+      <tr data-min="12"><td>12 to 13</td><td>60 to 69%</td><td>D</td><td>Fair</td></tr>
+      <tr data-min="0"><td>0 to 11</td><td>Below 60%</td><td>F</td><td>Needs Improvement</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div id="form"></div>
+
+<div class="actions" id="actions"><button type="button" id="submit">Submit assessment</button></div>
+<div class="msg" id="msg"></div>
+<div class="card result" id="result" style="display:none"></div>
+</div>
+
+<script>
+const SECS=["Python Basics","Tkinter","Turtle","Pygame"];
+const Q=[
+{s:0,q:"Which line correctly creates a variable?",o:["3 = lives","lives = 3","lives == 3","int lives"],a:1,n:"The name goes on the left and the value on the right of the = sign."},
+{s:0,q:"What does this code print?",code:"print(type(3.5))",o:["<class 'int'>","<class 'str'>","<class 'float'>","<class 'bool'>"],a:2,n:"3.5 has a decimal point, so it is a float."},
+{s:0,q:"What does this code print?",code:"print(7 // 2)",o:["3.5","4","3","2"],a:2,n:"// is floor division. 7 divided by 2 is 3.5, rounded down to 3."},
+{s:0,q:"Which loop runs exactly 5 times?",o:["for i in range(5):","for i in range(1, 5):","for i in range(6):","while i == 5:"],a:0,n:"range(5) gives 0, 1, 2, 3, 4, which is five repeats."},
+{s:0,q:"What does this code print?",code:"x = 10\nif x > 5:\n    print(\"big\")\nelse:\n    print(\"small\")",o:["small","big","Error","Nothing"],a:1,n:"10 is greater than 5, so the if branch runs."},
+{s:1,q:"Which line imports Tkinter in Python 3?",o:["import Tkinter","import tkinter","import tk","import gui"],a:1,n:"In Python 3 the module name is all lowercase: tkinter."},
+{s:1,q:"Which method starts the Tkinter event loop and keeps the window open?",o:["start()","run()","mainloop()","loop()"],a:2,n:"root.mainloop() waits for events such as clicks and key presses."},
+{s:1,q:"Which widget shows read-only text on a window?",o:["Label","Entry","Canvas","Frame"],a:0,n:"Label displays text or images. Entry is for typing input."},
+{s:1,q:"Which Button option sets the function that runs when it is clicked?",o:["text","command","bind","action"],a:1,n:"Button(root, text=\"Go\", command=my_function) calls my_function on click."},
+{s:1,q:"Which geometry manager arranges widgets in rows and columns?",o:["pack()","place()","grid()","list()"],a:2,n:"grid() uses row and column numbers."},
+{s:2,q:"Which command moves the turtle forward 100 steps?",o:["forward(100)","move(100)","step(100)","walk(100)"],a:0,n:"forward(distance) moves the turtle in the direction it is facing."},
+{s:2,q:"Which command turns the turtle 90 degrees to the left?",o:["turn(90)","rotate(90)","left(90)","spin(90)"],a:2,n:"left(angle) turns counterclockwise by the given angle."},
+{s:2,q:"Which command lifts the pen so the turtle moves without drawing?",o:["penup()","pendown()","hideturtle()","clear()"],a:0,n:"penup() stops drawing. pendown() starts drawing again."},
+{s:2,q:"To draw a square, how many times should this loop repeat?",code:"for i in range(__):\n    forward(100)\n    right(90)",o:["2","3","4","5"],a:2,n:"A square has 4 sides, so the loop repeats 4 times."},
+{s:2,q:"Which command changes the pen color to red?",o:["pensize('red')","speed('red')","shape('red')","pencolor('red')"],a:3,n:"pencolor() sets the drawing color."},
+{s:3,q:"Which function initializes all imported Pygame modules?",o:["pygame.start()","pygame.init()","pygame.begin()","pygame.load()"],a:1,n:"Call pygame.init() once at the start of your program."},
+{s:3,q:"Which line creates an 800 by 600 game window?",o:["pygame.window(800, 600)","pygame.screen(800, 600)","pygame.display.set_mode((800, 600))","pygame.display.create(800, 600)"],a:2,n:"set_mode takes a tuple of width and height."},
+{s:3,q:"What does this line do inside the game loop?",code:"clock = pygame.time.Clock()\nclock.tick(60)",o:["Waits 60 seconds","Limits the game to 60 frames per second","Draws 60 sprites","Closes the game after 60 frames"],a:1,n:"tick(60) caps the frame rate at 60 FPS."},
+{s:3,q:"Which call updates the screen so your drawings become visible?",o:["pygame.draw()","pygame.quit()","pygame.display.flip()","pygame.event.get()"],a:2,n:"display.flip() (or display.update()) refreshes the window."},
+{s:3,q:"Which event type is created when the player clicks the window close button?",o:["pygame.CLOSE","pygame.EXIT","pygame.STOP","pygame.QUIT"],a:3,n:"Check for event.type == pygame.QUIT to end the game loop."}
+];
+const form=document.getElementById('form');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+let last=-1;
+Q.forEach((item,i)=>{
+  if(item.s!==last){const h=document.createElement('div');h.className='sec';h.textContent='Part '+(item.s+1)+': '+SECS[item.s];form.appendChild(h);last=item.s;}
+  const c=document.createElement('div');c.className='card';c.id='q'+i;
+  let h='<div class="qn">Question '+(i+1)+'</div><div class="qt">'+esc(item.q)+'</div>';
+  if(item.code)h+='<pre><code>'+esc(item.code)+'</code></pre>';
+  shuffle(item.o.map((t,j)=>({t,j}))).forEach(o=>{h+='<label class="choice"><input type="radio" name="r'+i+'" value="'+o.j+'"><span>'+esc(o.t)+'</span></label>';});
+  h+='<div class="fbwrap"></div>';
+  c.innerHTML=h;form.appendChild(c);
+});
+const getAns=i=>{const r=document.querySelector('input[name="r'+i+'"]:checked');return r?+r.value:null;};
+function updateProgress(){
+  let n=0;Q.forEach((_,i)=>{if(getAns(i)!==null)n++;});
+  document.getElementById('progress').textContent=n+' of '+Q.length+' answered';
+  document.getElementById('barfill').style.width=(n/Q.length*100)+'%';
+}
+form.addEventListener('change',updateProgress);
+const GRADES=[[18,"A","Excellent"],[16,"B","Very Good"],[14,"C","Satisfactory (Passed)"],[12,"D","Fair"],[0,"F","Needs Improvement"]];
+let locked=false,summary='';
+document.getElementById('submit').addEventListener('click',()=>{
+  if(locked)return;
+  const msg=document.getElementById('msg'),name=document.getElementById('sname').value.trim();
+  const missing=[];Q.forEach((_,i)=>{if(getAns(i)===null)missing.push(i+1);});
+  if(!name){msg.textContent='Please enter your name before submitting.';document.getElementById('sname').focus();return;}
+  if(missing.length){msg.textContent='Please answer question'+(missing.length>1?'s ':' ')+missing.join(', ')+'.';document.getElementById('q'+(missing[0]-1)).scrollIntoView({behavior:'smooth',block:'center'});return;}
+  msg.textContent='';locked=true;
+  let score=0;const per=[0,0,0,0],tot=[0,0,0,0];
+  Q.forEach((item,i)=>{
+    const a=getAns(i),ok=a===item.a,card=document.getElementById('q'+i);
+    tot[item.s]++;if(ok){score++;per[item.s]++;}
+    card.querySelectorAll('.choice').forEach(l=>{const inp=l.querySelector('input');inp.disabled=true;const v=+inp.value;if(v===item.a)l.classList.add('ok');else if(v===a)l.classList.add('bad');});
+    card.querySelector('.fbwrap').innerHTML='<div class="fb '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Incorrect. ')+esc(item.n)+'</div>';
+  });
+  const pct=Math.round(score/Q.length*100),g=GRADES.find(x=>score>=x[0]),pass=score>=14;
+  document.querySelectorAll('#scale tbody tr').forEach(tr=>{if(+tr.dataset.min===g[0])tr.className='hl';});
+  summary='Python Assessment: '+name+' scored '+score+'/20 ('+pct+'%), Grade '+g[1]+' ('+g[2]+'). '+SECS.map((s,k)=>s+' '+per[k]+'/'+tot[k]).join(', ')+'.';
+  const r=document.getElementById('result');r.style.display='block';
+  r.innerHTML='<div class="qn">Results for '+esc(name)+'</div><div class="big">'+score+' / 20</div><div>'+pct+'%</div><div class="grade" style="color:var(--'+(pass?'ok':'bad')+')">Grade '+g[1]+': '+g[2]+'</div><div class="secs">'+SECS.map((s,k)=>'<div>'+s+'<b>'+per[k]+'/'+tot[k]+'</b></div>').join('')+'</div><div class="actions" style="justify-content:center"><button type="button" id="copy">Copy result</button><button type="button" class="alt" id="print">Print or save as PDF</button><button type="button" class="alt" id="retake">Retake</button></div><div class="progress" id="copied"></div>';
+  document.getElementById('actions').style.display='none';
+  document.getElementById('print').onclick=()=>window.print();
+  document.getElementById('retake').onclick=()=>location.reload();
+  document.getElementById('copy').onclick=async()=>{
+    const el=document.getElementById('copied');
+    try{await navigator.clipboard.writeText(summary);el.textContent='Result copied. Paste it into your message to your teacher.';}
+    catch(e){el.textContent=summary;}
+  };
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+});
+</script>
+</body>
+</html>

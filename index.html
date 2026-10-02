@@ -252,7 +252,31 @@ C.splice(3,0,{id:"roblox",name:"Roblox",desc:"Roblox Studio tools and Lua script
 {s:1,q:"Which is the correct way to start an if statement in Lua?",o:["if (score > 10) {","if score > 10:","if score > 10 then","when score > 10"],a:2,n:"Lua uses if ... then ... end."},
 {s:1,q:"Which line changes a part's color to red?",o:["part.Paint(red)","part.Red = true","part.Color = red","part.Color = Color3.new(1, 0, 0)"],a:3,n:"Color3.new(1, 0, 0) is full red, with no green or blue."}
 ]});
-[["🐱","#ea580c"],["📱","#15803d"],["⛏️","#7c3aed"],["🎮","#dc2626"],["🐍","#2563eb"]].forEach((v,i)=>{C[i].ic=v[0];C[i].col=v[1];});
+
+C[0].id="scratch34";C[0].name="Scratch: Grades 3 and 4";C[0].desc="Beginner level: sprites, motion, events, loops, and variables.";
+C.splice(1,0,{id:"scratch45",name:"Scratch: Grades 4 and 5",desc:"Harder level: clones, broadcasts, custom blocks, lists, and debugging.",secs:["Events, Motion and Control","Variables, Logic and Debugging"],q:[
+{s:0,q:"What is the difference between \"broadcast\" and \"broadcast and wait\"?",o:["There is no difference","broadcast and wait pauses the sender until the receivers finish","broadcast is only for sounds","broadcast and wait deletes the message"],a:1,n:"broadcast and wait makes the sending script pause until all the scripts that received the message are done."},
+{s:0,q:"Which block makes a sprite jump to where the mouse pointer is?",o:["point towards mouse-pointer","change x by 10","go to mouse-pointer","turn 15 degrees"],a:2,n:"go to mouse-pointer moves the sprite there. Point towards only rotates it."},
+{s:0,q:"What does the \"create clone of myself\" block do?",o:["Deletes the sprite","Makes a copy of the sprite that can run its own scripts","Changes the costume","Copies the backdrop"],a:1,n:"Clones are temporary copies, handy for bullets, enemies, or falling objects."},
+{s:0,q:"Which hat block runs code for each clone when it is created?",o:["when I start as a clone","when green flag clicked","when I receive message","when this sprite clicked"],a:0,n:"when I start as a clone tells each new clone what to do."},
+{s:0,q:"What does the \"stop all\" block do?",o:["Stops only the current sprite","Hides all sprites","Stops every script in the project","Pauses the music only"],a:2,n:"stop all ends all running scripts."},
+{s:0,q:"How is \"glide 2 secs to x: 0 y: 0\" different from \"go to x: 0 y: 0\"?",o:["It is faster","Glide moves smoothly over time, while go to jumps instantly","They do exactly the same thing","Glide changes the costume"],a:1,n:"glide animates the movement. go to teleports the sprite."},
+{s:0,q:"Which direction does \"point in direction 90\" make a sprite face?",o:["Up","Left","Down","Right"],a:3,n:"90 is right, 0 is up, 180 is down, and -90 is left."},
+{s:0,q:"Which Control block repeats its blocks until a condition becomes true?",o:["repeat until","forever","wait 1 seconds","stop all"],a:0,n:"repeat until checks the condition each time and stops when it is true."},
+{s:0,q:"What happens when two \"when green flag clicked\" scripts are in the same sprite?",o:["Only the first runs","Only the last runs","Scratch shows an error","Both run at the same time"],a:3,n:"Scripts with the same trigger run in parallel."},
+{s:0,q:"Which block makes a sprite turn around when it reaches the edge of the stage?",o:["if on edge, bounce","stop all","set rotation style","go to random position"],a:0,n:"if on edge, bounce flips the direction at the edge."},
+{s:1,q:"What is the difference between \"set score to 0\" and \"change score by 1\"?",o:["They are the same","Set replaces the value, change adds to the current value","Change replaces the value, set adds to it","Set hides the variable"],a:1,n:"set gives a fixed value. change adds to what is already there."},
+{s:1,q:"What does a variable marked \"For this sprite only\" mean?",o:["All sprites can change it","Only that sprite can use it","It is deleted when the game starts","It is shown on the stage forever"],a:1,n:"A sprite-only variable is private to that sprite."},
+{s:1,q:"What does the sprite say at the end of this script?",code:"set score to 5\nchange score by 3\nsay score",o:["5","3","8","53"],a:2,n:"5 + 3 = 8."},
+{s:1,q:"Which operator checks that score is greater than 10 AND lives is greater than 0?",o:["or","not","join","and"],a:3,n:"and is true only when both conditions are true."},
+{s:1,q:"A sprite keeps walking through a wall. What is the best fix?",o:["Make the stage bigger","Add a costume","Add an if block that checks if touching the wall and then changes direction","Delete the sprite"],a:2,n:"Use a touching check inside the loop to react when it hits the wall."},
+{s:1,q:"What does \"pick random 1 to 6\" best simulate?",o:["Rolling a die","Flipping a coin","Telling the time","Moving in a circle"],a:0,n:"A six-sided die gives a random number from 1 to 6."},
+{s:1,q:"What does a custom block in My Blocks let you do?",o:["Change the stage size","Make your own reusable block so you do not repeat code","Delete other blocks","Share your sprite online automatically"],a:1,n:"Custom blocks group steps under one name so you can reuse them."},
+{s:1,q:"What does (7 mod 2) report?",o:["3.5","3","0","1"],a:3,n:"mod gives the remainder. 7 divided by 2 is 3 remainder 1."},
+{s:1,q:"The score never goes up when the sprite touches the coin. What is the best first thing to check?",o:["That the touching check is inside a forever loop so it is tested all the time","Delete the coin","Add more costumes","Make the sprite bigger"],a:0,n:"If the check runs only once, it can miss the touch. Put it in a loop."},
+{s:1,q:"What is a list in Scratch used for?",o:["Changing backgrounds","Storing many items, like names or scores, in one place","Playing sounds","Drawing shapes"],a:1,n:"A list holds many values under one name."}
+]});
+[["🐱","#ea580c"],["🚀","#b45309"],["📱","#15803d"],["⛏️","#7c3aed"],["🎮","#dc2626"],["🐍","#2563eb"]].forEach((v,i)=>{C[i].ic=v[0];C[i].col=v[1];});
 C.forEach(c=>c.q.sort((a,b)=>a.s-b.s));
 const GR=[[90,"A","Excellent"],[80,"B","Very Good"],[70,"C","Satisfactory (Passed)"],[60,"D","Fair"],[0,"F","Needs Improvement"]];
 let cur=null,locked=false,summary='';
